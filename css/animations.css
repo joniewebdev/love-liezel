@@ -1,0 +1,7 @@
+@keyframes note-arrive{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes letter-arrive{0%{opacity:0;transform:translateY(24px) scale(.98)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes paper-settle{0%{opacity:0;transform:translateY(18px) rotate(-.6deg)}70%{opacity:1;transform:translateY(-2px) rotate(.15deg)}100%{opacity:1;transform:translateY(0) rotate(0)}}
+@keyframes seal-glow{0%,100%{box-shadow:0 0 0 0 rgba(135,83,79,0)}50%{box-shadow:0 0 0 5px rgba(135,83,79,.09)}}
+.opening-note{animation:paper-settle .65s cubic-bezier(.2,.7,.2,1) both}
+.envelope-trigger[aria-expanded=true] .mini-envelope-seal{animation:seal-glow 1.2s ease .25s 1}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
