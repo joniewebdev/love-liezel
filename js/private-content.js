@@ -28,11 +28,38 @@
       for (let i = 0; i < data.photos.length; i++) {
         const photo = data.photos[i];
         const img = $$('.polaroid')[i]?.querySelector('img');
+    
         if (img && photo) {
-          const media = await fetch(`${API}/api/media/${encodeURIComponent(photo)}`, { headers: { Authorization: `Bearer ${token}` }, cache: 'no-store' });
-          if (!media.ok) throw new Error('A private photo could not be loaded. Please sign in again.');
-          const blobUrl = URL.createObjectURL(await media.blob());
-          img.src = blobUrl; img.alt = `A private memory photograph ${i+1}`;
+          try {
+            const media = await fetch(
+              `${API}/api/media/${encodeURIComponent(photo)}`,
+              {
+                headers: { Authorization: `Bearer ${token}` },
+                cache: 'no-store'
+              }
+            );
+    
+            if (media.status === 401) {
+              throw new Error('Your session has expired. Please sign in again.');
+            }
+    
+            if (!media.ok) {
+              img.removeAttribute('src');
+              img.alt = 'Photo not uploaded yet';
+              img.classList.add('photo-unavailable');
+              continue;
+            }
+    
+            const blobUrl = URL.createObjectURL(await media.blob());
+            img.src = blobUrl;
+            img.alt = `A private memory photograph ${i + 1}`;
+          } catch (err) {
+            if (err.message.includes('session has expired')) throw err;
+    
+            img.removeAttribute('src');
+            img.alt = 'Photo temporarily unavailable';
+            img.classList.add('photo-unavailable');
+          }
         }
       }
     }
