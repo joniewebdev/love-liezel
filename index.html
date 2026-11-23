@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f4eee3">
     <meta name="description" content="A little keepsake made especially for Liezel.">
-    <title>A Little World for Liezel</title>
+    <title>A letter for Liezel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -20,20 +20,20 @@
 <body class="private-locked">
     <div class="privacy-gate" id="privacy-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
         <div class="gate-paper"><span class="gate-flower">✳</span>
-            <p class="eyebrow">a little world, just for you</p>
+            <p class="eyebrow">just for you</p>
             <h1 id="gate-title">A letter for<br><em>Liezel.</em></h1>
-            <p class="gate-copy">Some things are meant to be opened with a little key. Enter the passphrase to step inside.</p>
+            <p class="gate-copy">Some things are meant to be opened with a little key. Enter the date of the day na sinagot mo ko 😉 (MMDDYY)</p>
             <form id="passphrase-form">
                 <label class="visually-hidden" for="passphrase-input">Shared passphrase</label>
                 <input id="passphrase-input" name="passphrase" type="password" autocomplete="current-password" placeholder="your little secret" required maxlength="256">
-                <button type="submit" class="gate-submit" id="gate-submit">open my letter <span aria-hidden="true">→</span></button>
+                <button type="submit" class="gate-submit" id="gate-submit">open the letter <span aria-hidden="true">→</span></button>
                 <p class="gate-error" id="gate-error" role="alert" aria-live="polite"></p>
             </form>
             <p class="gate-foot handwritten">made with love, and meant for you.</p>
         </div>
     </div>
     <a class="skip-link" href="#chapter-02">Skip to the letter</a>
-    <header class="top-note"><a class="wordmark" href="#opening">a little world <span>for Liezel</span></a>
+    <header class="top-note"><a class="wordmark" href="#opening">a love letter <span>for Liezel</span></a>
         <div class="reading-progress"><span id="progress-fill"></span></div>
         <div class="header-actions">
           <button class="audio-toggle" id="audio-toggle" type="button" aria-pressed="false">♫ <span>music off</span></button>
@@ -45,7 +45,7 @@
             <p class="eyebrow">a small thing, made with love</p>
             <div class="opening-paper">
                 <p class="handwritten opening-to">for Liezel,</p>
-                <h1>A little world<br><em>made for you.</em></h1>
+                <h1>A love letter<br><em>made for you.</em></h1>
                 <p class="opening-copy">A few pages, a few memories, and a little something I wanted you to have.</p>
                 <button class="envelope-trigger" id="opening-envelope" type="button" aria-expanded="false" aria-controls="opening-note">
                   <span class="mini-envelope">
