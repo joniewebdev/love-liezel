@@ -460,7 +460,16 @@ h2 em {
     right: 8px;
     text-align: center;
     font: 1.25rem var(--script);
-    color: #65574d
+    color: #fff;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.65),
+        rgba(0, 0, 0, 0)
+    );
+    padding: 30px 8px 10px;
+    border-radius: 0 0 8px 8px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    z-index: 2;
 }
 
 .photo-tape {
