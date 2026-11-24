@@ -79,10 +79,17 @@
     const response = await fetch(`${API}/api/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ passphrase }), cache: 'no-store' });
     const result = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(result.error || 'That passphrase did not match.');
-    token = result.token;
-    sessionStorage.setItem(TOKEN_KEY, token);
-    await fetchPrivateContent();
-    unlock();
+    
+token = result.token;
+sessionStorage.setItem(TOKEN_KEY, token);
+
+await fetchPrivateContent();
+
+// Automatically start the background music after successful login.
+await window.playBackgroundMusic?.();
+
+unlock();
+
   }
   form?.addEventListener('submit', async event => {
     event.preventDefault(); error.textContent = ''; submit.disabled = true; submit.textContent = 'one moment…';
