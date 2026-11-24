@@ -16,7 +16,7 @@
   function showGate() { document.body.classList.add('private-locked'); gate.hidden = false; lock.hidden = true; document.querySelector('main')?.setAttribute('inert', ''); document.querySelector('.top-note')?.setAttribute('inert', ''); document.querySelector('.site-footer')?.setAttribute('inert', ''); input.value = ''; input.focus(); }
   async function fetchPrivateContent() {
     const response = await fetch(`${API}/api/content`, { headers: { Authorization: `Bearer ${token}` }, cache: 'no-store' });
-    if (!response.ok) throw new Error('Your private letter could not be loaded. Please sign in again.');
+    if (!response.ok) throw new Error('Your letter could not be loaded. Please sign in again.');
     const data = await response.json();
     text('#opening-note .handwritten', data.openingNote);
     text('#chapter-02 .placeholder-copy', data.introduction);
@@ -78,7 +78,7 @@
     if (!API || API.includes('YOUR-WORKER-NAME')) throw new Error('The Worker address has not been added in js/config.js yet.');
     const response = await fetch(`${API}/api/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ passphrase }), cache: 'no-store' });
     const result = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(result.error || 'That passphrase did not match.');
+    if (!response.ok) throw new Error(result.error || 'That password did not match.');
     
 token = result.token;
 sessionStorage.setItem(TOKEN_KEY, token);
@@ -95,7 +95,7 @@ unlock();
     event.preventDefault(); error.textContent = ''; submit.disabled = true; submit.textContent = 'one moment…';
     try { await signIn(input.value); }
     catch (err) { error.textContent = err.message; sessionStorage.removeItem(TOKEN_KEY); token = ''; }
-    finally { submit.disabled = false; submit.innerHTML = 'open my letter <span aria-hidden="true">→</span>'; }
+    finally { submit.disabled = false; submit.innerHTML = 'open letter <span aria-hidden="true">→</span>'; }
   });
   lock?.addEventListener('click', () => { sessionStorage.removeItem(TOKEN_KEY); token = ''; showGate(); });
   async function start() {
