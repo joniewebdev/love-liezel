@@ -68,23 +68,41 @@
     note.setAttribute('aria-expanded', String(note.getAttribute('aria-expanded') !== 'true'));
   }));
 
-  const audio = $('#background-audio');
-  const audioButton = $('#audio-toggle');
-  if (audio && audioButton) audioButton.addEventListener('click', async () => {
-    const label = $('span', audioButton);
+  
+const audio = $('#background-audio');
+const audioButton = $('#audio-toggle');
+
+function updateAudioButton(isPlaying) {
+  if (!audioButton) return;
+
+  audioButton.setAttribute('aria-pressed', String(isPlaying));
+
+  const label = $('span', audioButton);
+  if (label) label.textContent = isPlaying ? 'music on' : 'music off';
+}
+
+// Expose this function so the password handler can start the music.
+window.playBackgroundMusic = async function () {
+  if (!audio) return false;
+
+  try {
+    await audio.play();
+    updateAudioButton(true);
+    return true;
+  } catch (error) {
+    updateAudioButton(false);
+    return false;
+  }
+};
+
+if (audio && audioButton) {
+  audioButton.addEventListener('click', async () => {
     if (audio.paused) {
-      try {
-        await audio.play();
-        audioButton.setAttribute('aria-pressed', 'true');
-        if (label) label.textContent = 'music on';
-      } catch (_) {
-        if (label) label.textContent = 'add song file';
-        audioButton.setAttribute('aria-pressed', 'false');
-      }
+      await window.playBackgroundMusic();
     } else {
       audio.pause();
-      audioButton.setAttribute('aria-pressed', 'false');
-      if (label) label.textContent = 'music off';
+      updateAudioButton(false);
     }
   });
+}
 })();
